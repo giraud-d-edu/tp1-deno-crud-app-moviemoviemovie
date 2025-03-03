@@ -1,27 +1,28 @@
-import { Movie } from '../models/Movie.ts';
+import { Movie } from "../models/Movie.ts";
 
-export class MovieRepository {
-    private readonly movies: Map<string, Movie> = new Map();
+class FilmRepository {
+  private movies: Movie[] = [
+    new Movie(crypto.randomUUID(), "Interstellar", 2014, ["Matthew McConaughey"], []),
+    new Movie(crypto.randomUUID(), "The Dark Knight", 2008, ["Christian Bale"], [])
+  ];
 
-    addMovie(movie: Movie): void {
-        this.movies.set(movie.id, movie);
-    }
+  // Récupérer tous les films
+  getAll(): Movie[] {
+    return this.movies;
+  }
 
-    getMovieById(id: string): Movie | undefined {
-        return this.movies.get(id);
-    }
+  // Récupérer un film par ID
+  getById(id: string): Movie | undefined {
+    return this.movies.find(film => film.id === id);
+  }
 
-    updateMovie(movie: Movie): void {
-        if (this.movies.has(movie.id)) {
-            this.movies.set(movie.id, movie);
-        }
-    }
-
-    deleteMovie(id: string): void {
-        this.movies.delete(id);
-    }
-
-    getAllMovies(): Movie[] {
-        return Array.from(this.movies.values());
-    }
+  // Ajouter un film
+  add(title: string, releaseYear: number, actors: string[]): Movie {
+    const newFilm = new Movie(crypto.randomUUID(), title, releaseYear, actors, []);
+    this.movies.push(newFilm);
+    return newFilm;
+  }
 }
+
+// Exporter une instance unique pour éviter les problèmes de données partagées
+export const filmRepository = new FilmRepository();

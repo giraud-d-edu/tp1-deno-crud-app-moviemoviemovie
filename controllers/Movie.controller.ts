@@ -1,4 +1,3 @@
-// controllers/film.controller.ts
 import { Router, Context } from "../deps.ts";
 import { FilmService } from "../services/Movie.service.ts";
 
@@ -9,16 +8,16 @@ router.get("/movies", async (ctx: Context) => {
 });
 
 router.get("/movies/:id", async (ctx: Context) => {
-  const id = ctx.params.id!;
-  const movie = await FilmService.getFilmById(id);
+  const id = ctx.request.url.pathname.split("/").pop()!;
+  const film = await FilmService.getFilmById(id);
 
-  if (!movie) {
+  if (!film) {
     ctx.response.status = 404;
     ctx.response.body = { error: "Film not found" };
     return;
   }
 
-  ctx.response.body = movie;
+  ctx.response.body = film;
 });
 
 router.post("/movies", async (ctx: Context) => {
@@ -26,13 +25,13 @@ router.post("/movies", async (ctx: Context) => {
 
   if (!title || !releaseYear || !actors) {
     ctx.response.status = 400;
-    ctx.response.body = { error: "Missing fields" };
+    ctx.response.body = { error: "Title, releaseYear, and actors are required" };
     return;
   }
 
-  const newMovie = await FilmService.createFilm(title, releaseYear, actors);
+  const newFilm = await FilmService.createFilm(title, releaseYear, actors);
   ctx.response.status = 201;
-  ctx.response.body = newMovie;
+  ctx.response.body = newFilm;
 });
 
 export default router;
