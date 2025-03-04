@@ -64,10 +64,10 @@ codes.
 
 2. **Run the server**:
     ```bash
-    deno run --allow-net server.ts
+    deno run --allow-net main.ts
     ```
 
 ## Explanation
 
-The main file, `server.ts`, initializes the server and sets up routing. It serves as the entry point for the
-application, ensuring all components are correctly integrated.
+The main file, `main.ts`, initializes the server and sets up routing. It serves as the entry point for the application,
+ensuring all components are correctly integrated.
