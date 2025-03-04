@@ -1,4 +1,4 @@
-import { ActorDBO } from '../dbos/actor.dbo.ts';
+import { ActorDBO } from '../dbos/actorDbo.ts';
 import { MongoConnection } from '../mongo.ts';
 
 export class ActorRepository {

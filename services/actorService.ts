@@ -1,4 +1,4 @@
-import { ActorDBO } from '../dbos/actor.dbo.ts';
+import { ActorDBO } from '../dbos/actorDbo.ts';
 import { ActorDTO } from '../dtos/actor.dto.ts';
 import { actorRepository } from '../repositories/actorRepository.ts';
 

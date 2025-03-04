@@ -1,5 +1,5 @@
 import { Router, Context } from '../deps.ts';
-import { RatingService } from '../services/rating.service.ts';
+import { RatingService } from '../services/ratingService.ts';
 import { RatingDTO } from '../dtos/Rating.dto.ts';
 
 const router = new Router();

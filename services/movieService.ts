@@ -1,4 +1,4 @@
-import { MovieDBO } from '../dbos/movie.dbo.ts';
+import { MovieDBO } from '../dbos/movieDbo.ts';
 import { MovieDTO } from '../dtos/Movie.dto.ts';
 import { movieRepository } from '../repositories/MovieRepository.ts';
 
