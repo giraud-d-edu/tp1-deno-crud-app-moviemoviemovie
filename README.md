@@ -34,7 +34,6 @@ codes.
 -   **Tools and Technologies**:
     -   Developed with Deno and Oak for route management.
     -   Data is stored in memory using `Map()`, with an abstraction layer for future database integration.
-    -   A `routes.ts` file consolidates all routes.
 
 ## Project Structure
 
