@@ -4,16 +4,17 @@ import { actorRepository } from "../repositories/ActorRepository.ts";
 
 export class ActorService {
   static async getAllActors(): Promise<ActorDTO[]> {
-    return actorRepository.getAll().map(actor => new ActorDTO(actor.name, actor.birthYear));
+    const actors: ActorDBO[] = await actorRepository.getAll();
+    return actors.map((actor: ActorDBO) => new ActorDTO(actor.name, actor.birthYear));
   }
 
-  static async getActorById(id: string): Promise<ActorDTO | undefined> {
-    const actor = actorRepository.getById(id);
-    return actor ? new ActorDTO(actor.name, actor.birthYear) : undefined;
+  static async getActorById(id: string): Promise<ActorDTO | null> {
+    const actor: ActorDBO | null = await actorRepository.getById(id);
+    return actor ? new ActorDTO(actor.name, actor.birthYear) : null;
   }
 
   static async createActor(actorDto: ActorDTO): Promise<ActorDTO> {
-    const newActorDBO = actorRepository.add(actorDto.name, actorDto.birthYear);
+    const newActorDBO: ActorDBO = await actorRepository.add(actorDto.name, actorDto.birthYear);
     return new ActorDTO(newActorDBO.name, newActorDBO.birthYear);
   }
 }

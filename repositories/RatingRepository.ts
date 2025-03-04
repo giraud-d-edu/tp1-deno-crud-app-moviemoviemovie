@@ -1,27 +1,31 @@
-import { RatingDBO } from "../dbos/rating.dbo.ts";
-import { crypto } from "https://deno.land/std@0.203.0/crypto/mod.ts";
+import { RatingDBO } from "../dbos/Rating.dbo.ts";
+import { MongoConnection } from "../mongo.ts";
 
-class RatingRepository {
-  private ratings: RatingDBO[] = [
-    new RatingDBO("1", "1", 9), // Rating for "Interstellar"
-    new RatingDBO("2", "2", 8)  // Rating for "The Dark Knight"
-  ];
+export class RatingRepository {
+    private collection: any;
 
-  // ✅ Add this method to retrieve all ratings
-  getAll(): RatingDBO[] {
-    return this.ratings;
-  }
+    constructor() {
+        this.initialize();
+    }
 
-  getByFilmId(filmId: string): RatingDBO[] {
-    return this.ratings.filter(rating => rating.filmId === filmId);
-  }
+    async initialize() {
+        const db = await MongoConnection.getInstance().then(instance => instance.getDb("movies_db"));
+        this.collection = db.collection<RatingDBO>("ratings");
+    }
 
-  add(filmId: string, score: number): RatingDBO {
-    const newRating = new RatingDBO(crypto.randomUUID(), filmId, score);
-    this.ratings.push(newRating);
-    return newRating;
-  }
+    async getAll(): Promise<RatingDBO[]> {
+        return await this.collection.find().toArray();
+    }
+
+    async getByFilmId(filmId: string): Promise<RatingDBO[]> {
+        return await this.collection.find({ filmId }).toArray();
+    }
+
+    async add(filmId: string, score: number): Promise<RatingDBO> {
+        const newRating: RatingDBO = { id: crypto.randomUUID(), filmId, score };
+        await this.collection.insertOne(newRating);
+        return newRating;
+    }
 }
 
-// Export an instance of the repository
 export const ratingRepository = new RatingRepository();

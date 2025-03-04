@@ -1,26 +1,40 @@
-import { ActorDBO } from "../dbos/actor.dbo.ts";
-import { crypto } from "https://deno.land/std@0.203.0/crypto/mod.ts";
+import { ActorDBO } from "../dbos/Actor.dbo.ts";
+import { MongoConnection } from "../mongo.ts";
 
-class ActorRepository {
-  private actors: ActorDBO[] = [
-    new ActorDBO("1", "Leonardo DiCaprio", 1974, ["1"]),
-    new ActorDBO("2", "Christian Bale", 1974, ["2"])
-  ];
+export class ActorRepository {
+    private collection: any;
 
-  getAll(): ActorDBO[] {
-    return this.actors;
-  }
+    constructor() {
+        this.initialize();
+    }
 
-  getById(id: string): ActorDBO | undefined {
-    return this.actors.find(actor => actor.id === id);
-  }
+    async initialize() {
+        const db = await MongoConnection.getInstance().then(instance => instance.getDb("movies_db"));
+        this.collection = db.collection<ActorDBO>("actors");
+    }
 
-  add(name: string, birthYear: number): ActorDBO {
-    const newActor = new ActorDBO(crypto.randomUUID(), name, birthYear);
-    this.actors.push(newActor);
-    return newActor;
-  }
+    async getAll(): Promise<ActorDBO[]> {
+        if (!this.collection) {
+            throw new Error("MongoDB connection not initialized");
+        }
+        return await this.collection.find({}).toArray();
+    }
+
+    async getById(id: string): Promise<ActorDBO | null> {
+        if (!this.collection) {
+            throw new Error("MongoDB connection not initialized");
+        }
+        return await this.collection.findOne({ id });
+    }
+
+    async add(name: string, birthYear: number): Promise<ActorDBO> {
+        if (!this.collection) {
+            throw new Error("MongoDB connection not initialized");
+        }
+        const newActor: ActorDBO = { id: crypto.randomUUID(), name, birthYear, films: [] };
+        await this.collection.insertOne(newActor);
+        return newActor;
+    }
 }
 
-// Exporter une instance unique pour éviter les problèmes de données partagées
 export const actorRepository = new ActorRepository();

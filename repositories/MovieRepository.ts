@@ -1,28 +1,31 @@
 import { MovieDBO } from "../dbos/Movie.dbo.ts";
+import { MongoConnection } from "../mongo.ts";
 
-class FilmRepository {
-  private movies: MovieDBO[] = [
-    new MovieDBO("1", "Interstellar", 2014, ["Matthew McConaughey"], []),
-    new MovieDBO("2", "The Dark Knight", 2008, ["Christian Bale"], [])
-  ];
+export class MovieRepository {
+    private collection: any;
 
-  // Récupérer tous les films
-  getAll(): MovieDBO[] {
-    return this.movies;
-  }
+    constructor() {
+        this.initialize();
+    }
 
-  // Récupérer un film par ID
-  getById(id: string): MovieDBO | undefined {
-    return this.movies.find(film => film.id === id);
-  }
+    async initialize() {
+        const db = await MongoConnection.getInstance().then(instance => instance.getDb("movies_db"));
+        this.collection = db.collection<MovieDBO>("films");
+    }
 
-  // Ajouter un film
-  add(title: string, releaseYear: number, actors: string[]): MovieDBO {
-    const newFilm = new MovieDBO(crypto.randomUUID(), title, releaseYear, actors, []);
-    this.movies.push(newFilm);
-    return newFilm;
-  }
+    async getAll(): Promise<MovieDBO[]> {
+        return await this.collection.find({}).toArray();
+    }
+
+    async getById(movieId: string): Promise<MovieDBO | null> {
+        return await this.collection.findOne({ id: movieId });
+    }
+
+    async add(title: string, releaseYear: number, actors: string[]): Promise<MovieDBO> {
+        const newMovie: MovieDBO = { id: crypto.randomUUID(), title, releaseYear, actors, ratings: [] };
+        await this.collection.insertOne(newMovie);
+        return newMovie;
+    }
 }
 
-// Exporter une instance unique pour éviter les problèmes de données partagées
-export const filmRepository = new FilmRepository();
+export const movieRepository = new MovieRepository();
