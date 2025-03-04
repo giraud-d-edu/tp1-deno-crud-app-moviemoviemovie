@@ -1,0 +1,343 @@
+{
+    "info": {
+        "_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "name": "TP1 Deno CRUD App - Movies",
+        "description": "Collection pour l'API de gestion de films, acteurs et évaluations",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Movies",
+            "item": [
+                {
+                    "name": "Get All Movies",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8000/movies",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["movies"]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Movie By ID",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8000/movies/:id",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["movies", ":id"],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "",
+                                    "description": "ID du film à récupérer"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Create Movie",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "http://localhost:8000/movies",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["movies"]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"title\": \"Inception\",\n    \"releaseYear\": 2010,\n    \"actors\": []\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Update Movie",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "http://localhost:8000/movies/:id",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["movies", ":id"],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "",
+                                    "description": "ID du film à mettre à jour"
+                                }
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"title\": \"Inception (Updated)\",\n    \"releaseYear\": 2010,\n    \"actors\": []\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Delete Movie",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "http://localhost:8000/movies/:id",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["movies", ":id"],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "",
+                                    "description": "ID du film à supprimer"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Actors",
+            "item": [
+                {
+                    "name": "Get All Actors",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8000/actors",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["actors"]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Actor By ID",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8000/actors/:id",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["actors", ":id"],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "",
+                                    "description": "ID de l'acteur à récupérer"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Create Actor",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "http://localhost:8000/actors",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["actors"]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Leonardo DiCaprio\",\n    \"birthYear\": 1974,\n    \"films\": []\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Update Actor",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "http://localhost:8000/actors/:id",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["actors", ":id"],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "",
+                                    "description": "ID de l'acteur à mettre à jour"
+                                }
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"name\": \"Leonardo DiCaprio\",\n    \"birthYear\": 1974,\n    \"films\": []\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Delete Actor",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "http://localhost:8000/actors/:id",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["actors", ":id"],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "",
+                                    "description": "ID de l'acteur à supprimer"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Ratings",
+            "item": [
+                {
+                    "name": "Get All Ratings",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8000/ratings",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["ratings"]
+                        }
+                    }
+                },
+                {
+                    "name": "Get Rating By ID",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:8000/ratings/:id",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["ratings", ":id"],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "",
+                                    "description": "ID de l'évaluation à récupérer"
+                                }
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Create Rating",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "http://localhost:8000/ratings",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["ratings"]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"filmId\": \"\",\n    \"user\": \"John Doe\",\n    \"score\": 8.5\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Update Rating",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "http://localhost:8000/ratings/:id",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["ratings", ":id"],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "",
+                                    "description": "ID de l'évaluation à mettre à jour"
+                                }
+                            ]
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"filmId\": \"\",\n    \"user\": \"John Doe\",\n    \"score\": 9.0\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "Delete Rating",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "http://localhost:8000/ratings/:id",
+                            "protocol": "http",
+                            "host": ["localhost"],
+                            "port": "8000",
+                            "path": ["ratings", ":id"],
+                            "variable": [
+                                {
+                                    "key": "id",
+                                    "value": "",
+                                    "description": "ID de l'évaluation à supprimer"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
