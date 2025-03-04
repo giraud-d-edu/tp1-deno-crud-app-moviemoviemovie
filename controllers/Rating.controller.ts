@@ -10,7 +10,7 @@ router.get("/ratings", async (ctx: Context) => {
 
 // Récupérer les notes pour un film spécifique
 router.get("/ratings/:id", async (ctx: Context) => {
-  const filmId = ctx.request.url.searchParams.get("id")!;
+  const filmId = ctx.request.url.searchParams.get("filmId")!;
   ctx.response.body = await RatingService.getRatingsForFilm(filmId);
 });
 

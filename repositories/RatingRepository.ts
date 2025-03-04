@@ -3,8 +3,8 @@ import { crypto } from "https://deno.land/std@0.203.0/crypto/mod.ts";
 
 class RatingRepository {
   private ratings: Rating[] = [
-    new Rating("1", "1", "User1", 9), // Note pour "Interstellar"
-    new Rating("2", "2", "User2", 8)  // Note pour "The Dark Knight"
+    new Rating("1", "1", 9), // Note pour "Interstellar"
+    new Rating("2", "2", 8)  // Note pour "The Dark Knight"
   ];
 
   // Récupérer toutes les notes
@@ -19,7 +19,7 @@ class RatingRepository {
 
   // Ajouter une note
   add(filmId: string, user: string, score: number): Rating {
-    const newRating = new Rating(crypto.randomUUID(), filmId, user, score);
+    const newRating = new Rating(crypto.randomUUID(), filmId, score);
     this.ratings.push(newRating);
     return newRating;
   }
