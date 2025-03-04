@@ -1,7 +1,7 @@
 import { Application } from './deps.ts';
-import filmRouter from './controllers/movie.controller.ts';
-import actorRouter from './controllers/actor.controller.ts';
-import ratingRouter from './controllers/rating.controller.ts';
+import filmRouter from './controllers/movieController.ts';
+import actorRouter from './controllers/actorController.ts';
+import ratingRouter from './controllers/ratingController.ts';
 import { MongoConnection } from './mongo.ts';
 
 const app = new Application();
