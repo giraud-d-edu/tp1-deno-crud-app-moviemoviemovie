@@ -1,5 +1,5 @@
-import { RatingDBO } from "../dbos/Rating.dbo.ts";
-import { MongoConnection } from "../mongo.ts";
+import { RatingDBO } from '../dbos/rating.dbo.ts';
+import { MongoConnection } from '../mongo.ts';
 
 export class RatingRepository {
     private collection: any;
@@ -9,8 +9,8 @@ export class RatingRepository {
     }
 
     async initialize() {
-        const db = await MongoConnection.getInstance().then(instance => instance.getDb("movies_db"));
-        this.collection = db.collection<RatingDBO>("ratings");
+        const db = await MongoConnection.getInstance().then((instance) => instance.getDb('movies_db'));
+        this.collection = db.collection<RatingDBO>('ratings');
     }
 
     async getAll(): Promise<RatingDBO[]> {

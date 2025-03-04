@@ -1,6 +1,3 @@
 export class RatingDTO {
-  constructor(
-    public filmId: string,
-    public score: number,
-  ) {}
+    constructor(public filmId: string, public score: number) {}
 }
