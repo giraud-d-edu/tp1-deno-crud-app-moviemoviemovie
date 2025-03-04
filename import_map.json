@@ -1,0 +1,8 @@
+{
+    "imports": {
+      "oak": "https://deno.land/x/oak@v12.6.1/mod.ts",
+      "uuid": "https://deno.land/std@0.225.0/uuid/mod.ts",
+      "log": "https://deno.land/std@0.225.0/log/mod.ts"
+    }
+  }
+  

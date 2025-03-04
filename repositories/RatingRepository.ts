@@ -1,27 +1,18 @@
-import { Rating } from '../models/Rating.ts';
+import { Rating } from "../models/Rating.ts";
+import { crypto } from "https://deno.land/std@0.203.0/crypto/mod.ts";
 
-export class RatingRepository {
-    private readonly ratings: Map<string, Rating> = new Map();
+class RatingRepository {
+  private ratings: Rating[] = [];
 
-    addRating(rating: Rating): void {
-        this.ratings.set(rating.id, rating);
-    }
+  getAllByFilm(filmId: string): Rating[] {
+    return this.ratings.filter(rating => rating.filmId === filmId);
+  }
 
-    getRatingById(id: string): Rating | undefined {
-        return this.ratings.get(id);
-    }
-
-    updateRating(rating: Rating): void {
-        if (this.ratings.has(rating.id)) {
-            this.ratings.set(rating.id, rating);
-        }
-    }
-
-    deleteRating(id: string): void {
-        this.ratings.delete(id);
-    }
-
-    getAllRatings(): Rating[] {
-        return Array.from(this.ratings.values());
-    }
+  add(filmId: string, user: string, score: number): Rating {
+    const newRating = new Rating(crypto.randomUUID(), filmId, user, score);
+    this.ratings.push(newRating);
+    return newRating;
+  }
 }
+
+export const ratingRepository = new RatingRepository();
