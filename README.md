@@ -44,7 +44,6 @@ codes.
 /models
 /dtos
 /repositories
-/routes
 ```
 
 -   **controllers/**: Handles incoming requests and responses.
@@ -52,7 +51,6 @@ codes.
 -   **models/**: Defines data structures for Movies, Actors, and Ratings.
 -   **dtos/**: Contains Data Transfer Objects for API communication.
 -   **repositories/**: Manages data storage and retrieval.
--   **routes/**: Defines API endpoints.
 
 ## Getting Started
 
