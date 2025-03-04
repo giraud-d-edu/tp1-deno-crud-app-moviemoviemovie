@@ -3,8 +3,8 @@ import { crypto } from "https://deno.land/std@0.203.0/crypto/mod.ts";
 
 class ActorRepository {
   private actors: Actor[] = [
-    new Actor(crypto.randomUUID(), "Leonardo DiCaprio", 1974, []),
-    new Actor(crypto.randomUUID(), "Christian Bale", 1974, [])
+    new Actor("1", "Leonardo DiCaprio", 1974, []),
+    new Actor("2", "Christian Bale", 1974, [])
   ];
 
   getAll(): Actor[] {

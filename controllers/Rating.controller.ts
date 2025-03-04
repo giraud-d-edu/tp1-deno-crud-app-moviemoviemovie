@@ -3,6 +3,18 @@ import { RatingService } from "../services/Rating,service.ts";
 
 const router = new Router();
 
+// Récupérer toutes les notes
+router.get("/ratings", async (ctx: Context) => {
+  ctx.response.body = await RatingService.getAllRatings();
+});
+
+// Récupérer les notes pour un film spécifique
+router.get("/ratings/:id", async (ctx: Context) => {
+  const filmId = ctx.request.url.searchParams.get("id")!;
+  ctx.response.body = await RatingService.getRatingsForFilm(filmId);
+});
+
+// Ajouter une nouvelle note
 router.post("/ratings", async (ctx: Context) => {
   const { filmId, user, score } = await ctx.request.body().value;
 
@@ -28,11 +40,6 @@ router.post("/ratings", async (ctx: Context) => {
 
   ctx.response.status = 201;
   ctx.response.body = newRating;
-});
-
-router.get("/ratings/:filmId", async (ctx: Context) => {
-  const filmId = ctx.request.url.searchParams.get("filmId")!;
-  ctx.response.body = await RatingService.getRatingsForFilm(filmId);
 });
 
 export default router;

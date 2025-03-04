@@ -2,8 +2,8 @@ import { Movie } from "../models/Movie.ts";
 
 class FilmRepository {
   private movies: Movie[] = [
-    new Movie(crypto.randomUUID(), "Interstellar", 2014, ["Matthew McConaughey"], []),
-    new Movie(crypto.randomUUID(), "The Dark Knight", 2008, ["Christian Bale"], [])
+    new Movie("1", "Interstellar", 2014, ["Matthew McConaughey"], []),
+    new Movie("2", "The Dark Knight", 2008, ["Christian Bale"], [])
   ];
 
   // Récupérer tous les films
