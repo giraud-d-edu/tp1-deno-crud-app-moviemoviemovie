@@ -1,5 +1,5 @@
-import { RatingDTO } from '../dtos/Rating.dto.ts';
-import { ratingRepository } from '../repositories/RatingRepository.ts';
+import { RatingDTO } from '../dtos/ratingDto.ts';
+import { ratingRepository } from '../repositories/ratingRepository.ts';
 
 export class RatingService {
     // ✅ Retrieve all ratings

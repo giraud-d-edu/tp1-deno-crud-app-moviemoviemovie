@@ -1,6 +1,6 @@
 import { MovieDBO } from '../dbos/movieDbo.ts';
-import { MovieDTO } from '../dtos/Movie.dto.ts';
-import { movieRepository } from '../repositories/MovieRepository.ts';
+import { MovieDTO } from '../dtos/movieDto.ts';
+import { movieRepository } from '../repositories/movieRepository.ts';
 
 export class FilmService {
     static async getAllFilms(): Promise<MovieDTO[]> {

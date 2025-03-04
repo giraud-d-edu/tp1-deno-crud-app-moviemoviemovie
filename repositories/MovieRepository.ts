@@ -1,4 +1,4 @@
-import { MovieDBO } from '../dbos/movie.dbo.ts';
+import { MovieDBO } from '../dbos/movieDbo.ts';
 import { MongoConnection } from '../mongo.ts';
 
 export class MovieRepository {

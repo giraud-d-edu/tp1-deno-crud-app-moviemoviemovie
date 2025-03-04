@@ -1,6 +1,6 @@
 import { Router, Context } from '../deps.ts';
-import { FilmService } from '../services/movie.service.ts';
-import { MovieDTO } from '../dtos/Movie.dto.ts';
+import { FilmService } from '../services/movieService.ts';
+import { MovieDTO } from '../dtos/movieDto.ts';
 
 const router = new Router();
 

@@ -1,4 +1,4 @@
-import { RatingDBO } from '../dbos/rating.dbo.ts';
+import { RatingDBO } from '../dbos/ratingDbo.ts';
 import { MongoConnection } from '../mongo.ts';
 
 export class RatingRepository {

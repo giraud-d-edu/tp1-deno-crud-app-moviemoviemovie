@@ -1,6 +1,6 @@
 import { Router, Context } from '../deps.ts';
-import { ActorService } from '../services/actor.service.ts';
-import { ActorDTO } from '../dtos/actor.dto.ts';
+import { ActorService } from '../services/actorService.ts';
+import { ActorDTO } from '../dtos/actorDto.ts';
 
 const router = new Router();
 

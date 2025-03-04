@@ -1,5 +1,5 @@
 import { ActorDBO } from '../dbos/actorDbo.ts';
-import { ActorDTO } from '../dtos/actor.dto.ts';
+import { ActorDTO } from '../dtos/actorDto.ts';
 import { actorRepository } from '../repositories/actorRepository.ts';
 
 export class ActorService {
