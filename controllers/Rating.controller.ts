@@ -1,26 +1,34 @@
 import { Router, Context } from "../deps.ts";
-import { RatingService } from "../services/Rating,service.ts";
+import { RatingService } from "../services/Rating.service.ts";
+import { RatingDTO } from "../dtos/Rating.dto.ts";
 
 const router = new Router();
 
-// Récupérer toutes les notes
+// ✅ This should now work because getAllRatings() is implemented
 router.get("/ratings", async (ctx: Context) => {
   ctx.response.body = await RatingService.getAllRatings();
 });
 
-// Récupérer les notes pour un film spécifique
+// Retrieve ratings for a specific film
 router.get("/ratings/:id", async (ctx: Context) => {
-  const filmId = ctx.request.url.searchParams.get("filmId")!;
+  const filmId = (ctx as any).params.id;
+
+  if (!filmId) {
+    ctx.response.status = 400;
+    ctx.response.body = { error: "Film ID is required" };
+    return;
+  }
+
   ctx.response.body = await RatingService.getRatingsForFilm(filmId);
 });
 
-// Ajouter une nouvelle note
+// Add a new rating
 router.post("/ratings", async (ctx: Context) => {
-  const { filmId, user, score } = await ctx.request.body().value;
+  const { filmId, score } = await ctx.request.body().value;
 
-  if (!filmId || !user || score === undefined) {
+  if (!filmId || score === undefined) {
     ctx.response.status = 400;
-    ctx.response.body = { error: "filmId, user, and score are required" };
+    ctx.response.body = { error: "filmId and score are required" };
     return;
   }
 
@@ -30,7 +38,8 @@ router.post("/ratings", async (ctx: Context) => {
     return;
   }
 
-  const newRating = await RatingService.addRating(filmId, user, score);
+  const ratingDto = new RatingDTO(filmId, score);
+  const newRating = await RatingService.addRating(ratingDto);
 
   if (!newRating) {
     ctx.response.status = 404;

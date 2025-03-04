@@ -1,6 +1,7 @@
-// dtos/film.dto.ts
-export interface MovieDTO {
-  title: string;
-  releaseYear: number;
-  actors: string[];
+export class MovieDTO {
+  constructor(
+    public title: string,
+    public releaseYear: number,
+    public actors: string[]
+  ) {}
 }

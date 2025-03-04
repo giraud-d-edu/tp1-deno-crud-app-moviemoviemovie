@@ -1,5 +1,6 @@
 import { Router, Context } from "../deps.ts";
 import { ActorService } from "../services/Actor.service.ts";
+import { ActorDTO } from "../dtos/Actor.dto.ts";
 
 const router = new Router();
 
@@ -8,7 +9,7 @@ router.get("/actors", async (ctx: Context) => {
 });
 
 router.get("/actors/:id", async (ctx: Context) => {
-  const id = ctx.request.url.pathname.split("/").pop()!;
+  const id = ctx.request.url.pathname.split("/")[2];
   const actor = await ActorService.getActorById(id);
 
   if (!actor) {
@@ -21,15 +22,10 @@ router.get("/actors/:id", async (ctx: Context) => {
 });
 
 router.post("/actors", async (ctx: Context) => {
-  const { name, birthYear } = await ctx.request.body().value;
+  const body = await ctx.request.body().value;
+  const actorDto = new ActorDTO(body.name, body.birthYear);
 
-  if (!name || !birthYear) {
-    ctx.response.status = 400;
-    ctx.response.body = { error: "Name and birthYear are required" };
-    return;
-  }
-
-  const newActor = await ActorService.createActor(name, birthYear);
+  const newActor = await ActorService.createActor(actorDto);
   ctx.response.status = 201;
   ctx.response.body = newActor;
 });

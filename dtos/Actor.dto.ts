@@ -1,5 +1,6 @@
-// dtos/actor.dto.ts
-export interface ActorDTO {
-  name: string;
-  birthYear: number;
+export class ActorDTO {
+  constructor(
+    public name: string,
+    public birthYear: number
+  ) {}
 }

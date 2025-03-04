@@ -1,5 +1,6 @@
 import { Router, Context } from "../deps.ts";
 import { FilmService } from "../services/Movie.service.ts";
+import { MovieDTO } from "../dtos/Movie.dto.ts";
 
 const router = new Router();
 
@@ -8,7 +9,8 @@ router.get("/movies", async (ctx: Context) => {
 });
 
 router.get("/movies/:id", async (ctx: Context) => {
-  const id = ctx.request.url.pathname.split("/").pop()!;
+  const id = ctx.request.url.pathname.split("/")[2];
+  
   const film = await FilmService.getFilmById(id);
 
   if (!film) {
@@ -21,15 +23,10 @@ router.get("/movies/:id", async (ctx: Context) => {
 });
 
 router.post("/movies", async (ctx: Context) => {
-  const { title, releaseYear, actors } = await ctx.request.body().value;
+  const body = await ctx.request.body().value;
+  const filmDto = new MovieDTO(body.title, body.releaseYear, body.actors);
 
-  if (!title || !releaseYear || !actors) {
-    ctx.response.status = 400;
-    ctx.response.body = { error: "Title, releaseYear, and actors are required" };
-    return;
-  }
-
-  const newFilm = await FilmService.createFilm(title, releaseYear, actors);
+  const newFilm = await FilmService.createFilm(filmDto);
   ctx.response.status = 201;
   ctx.response.body = newFilm;
 });
