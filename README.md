@@ -34,7 +34,6 @@ codes.
 -   **Tools and Technologies**:
     -   Developed with Deno and Oak for route management.
     -   Data is stored in memory using `Map()`, with an abstraction layer for future database integration.
-    -   A `routes.ts` file consolidates all routes.
 
 ## Project Structure
 
@@ -44,7 +43,6 @@ codes.
 /models
 /dtos
 /repositories
-/routes
 ```
 
 -   **controllers/**: Handles incoming requests and responses.
@@ -52,7 +50,6 @@ codes.
 -   **models/**: Defines data structures for Movies, Actors, and Ratings.
 -   **dtos/**: Contains Data Transfer Objects for API communication.
 -   **repositories/**: Manages data storage and retrieval.
--   **routes/**: Defines API endpoints.
 
 ## Getting Started
 
@@ -64,10 +61,10 @@ codes.
 
 2. **Run the server**:
     ```bash
-    deno run --allow-net server.ts
+    deno run --allow-net main.ts
     ```
 
 ## Explanation
 
-The main file, `server.ts`, initializes the server and sets up routing. It serves as the entry point for the
-application, ensuring all components are correctly integrated.
+The main file, `main.ts`, initializes the server and sets up routing. It serves as the entry point for the application,
+ensuring all components are correctly integrated.
